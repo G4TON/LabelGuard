@@ -11,4 +11,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ping Streamlit URL
-        run: curl -sL https://rpl-assist.streamlit.app > /dev/null
+        run: curl -sL -c cookies.txt -b cookies.txt https://rpl-assist.streamlit.app > /dev/null || true
