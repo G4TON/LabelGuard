@@ -1,9 +1,14 @@
+import sys
+import os
+
+# Ensure Python can find the 'app' module regardless of how the script is executed
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import streamlit as st
 from app.database.connection import init_db, SessionLocal
 from app.database.models import User, Worker
 from app.ui import worker as worker_ui, assessor as assessor_ui, admin as admin_ui
 from app.config import config
-import os
 
 # Initialize DB on first run
 init_db()
