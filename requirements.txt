@@ -1,0 +1,10 @@
+streamlit
+sqlalchemy
+pandas
+google-genai
+scikit-learn
+plotly
+fpdf2
+pytest
+pyyaml
+python-dotenv
