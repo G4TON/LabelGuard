@@ -10,6 +10,8 @@ from app.database.models import User, Worker
 from app.ui import worker as worker_ui, assessor as assessor_ui, admin as admin_ui
 from app.config import config
 
+st.set_page_config(page_title="RPL-Assist", layout="wide")
+
 # Initialize DB safely to prevent race conditions on Streamlit Cloud
 @st.cache_resource
 def setup_db():
@@ -17,10 +19,6 @@ def setup_db():
     db = SessionLocal()
     seed_demo_data(db)
     db.close()
-
-setup_db()
-
-st.set_page_config(page_title="RPL-Assist", layout="wide")
 
 def seed_demo_data(db):
     if not db.query(User).filter_by(username="worker").first():
@@ -64,6 +62,7 @@ def seed_demo_data(db):
         db.commit()
 
 def main():
+    setup_db()
     db = SessionLocal()
     
     if 'current_user_id' not in st.session_state:
