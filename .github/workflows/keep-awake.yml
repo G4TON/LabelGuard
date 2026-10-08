@@ -10,5 +10,20 @@ jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping Streamlit URL
-        run: curl -sL -c cookies.txt -b cookies.txt https://rpl-assist.streamlit.app > /dev/null || true
+      - name: Ping Streamlit URL with Headless Browser
+        run: |
+          npm init -y
+          npm install playwright
+          node -e "
+          const { chromium } = require('playwright');
+          (async () => {
+            const browser = await chromium.launch();
+            const page = await browser.newPage();
+            console.log('Visiting Streamlit app...');
+            await page.goto('https://rpl-assist.streamlit.app', { waitUntil: 'networkidle' });
+            console.log('Waiting 5 seconds for WebSocket to connect...');
+            await page.waitForTimeout(5000);
+            console.log('Success! Closing browser.');
+            await browser.close();
+          })();
+          "
