@@ -14,6 +14,7 @@ jobs:
         run: |
           npm init -y
           npm install playwright
+          npx playwright install chromium
           node -e "
           const { chromium } = require('playwright');
           (async () => {
